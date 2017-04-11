@@ -1,0 +1,229 @@
+   *** Version History ***
+   
+
+V-0.1.0: Unofficial Release
+Released: 11/8/2015
+
+  --  Has a Field class and Ring class with types that extend both
+  
+  --  Adds support for BigInteger, Integer, Complex, PlanarVector, etc...
+  
+  --  Adds a class called RingMath that can perform operations on any ring
+
+  
+V-0.2.0: The Polygon Update
+Released: 11/9/2015
+
+  --  Adds a polygon class so you can build polygons and display them on the screen
+      simpler than java's built in polygon displayer allows for.
+      
+  --  Creates a class called PolygonMaker that allows the quick creation for squares
+  
+  
+ V-0.2.1: PolygonMaker Improvement Update
+ Released: 12/1/2015
+ 
+  --  Added regular n-gon maker to the PolygonMaker class which adds support for creating an n-gon
+      with preset side length, inner-radius length, or outer-radius length.
+      
+  --  Changed how the class is built as to get rid of the test classes in the packages to decrease build
+      volume and not have junk classes in the jar.
+      
+      
+V-0.2.2: PolygonTools Update
+Released: 12/1/2015
+
+  --  Added a PolygonTools class that gives the ability to detect if two polygons are colliding
+  
+  --  Finally declares a PlanarVector as of type ring to speed up certain operations the multiply
+      method is simply linear multiplication of vectors, i.e. <x,y>*<a,b> = <x*a,y*b>
+      
+      
+V-0.2.3: Immutable Polygon Update
+Released: 12/2/2015
+
+  --  Made Polygons immutable to increase time on rendering and equality.
+  
+  --  Made the PolygonMaker class the creater for polygons if all points aren't known.
+  
+  --  To build a polygon just use the build() method on the polygon, this will not change
+      the current polygon maker so you can add another point and make another polygon.
+      
+  --  The created polygons will be centered around their centroid to ease in rotating drawings.
+  
+  
+V-0.3.0: Shapes Update
+Released: 12/3/2015
+
+  --  Added the new shape class that is a superclass to polygon
+  
+  --  All added shape types must include a polygon approximation to what their shape is
+      this will allow for curves to be approximated in collisions with many straight lines
+      
+  --  Shape classes now define two draw methods, draw and outline, draw fills and outline
+      draws an outline around the shape.
+      
+  --  PolygonTools was replaced mostly by ShapeTools for collisions with shapes using their
+      approximations.
+      
+  --  PolygonTools now only has rotatepolygon, this rotates a polygon around its centroid and
+      returns a new polygon, this is used in the new shape collision detection method that 
+      detects collisions between rotated shapes.
+      
+  --  Added two new shape classes, circle and ellipse with circle just being a subclass
+      of ellipse.
+      
+      
+V-0.3.1: Approximation Update
+Released: 12/6/2015
+
+  --  Added an auto approximator in the ApproximationTool class that will generate an approximation
+      given a parameterization and a maximum error. The error is measured as the distance of the 
+      point in the middle of the approximation from the rest of the line.
+      
+  --  Changed the shape collision detector to not go through the polygon projection on every edge
+      if the polygons are too far apart to possibly collide anyways.
+      
+  --  Added a new shape class, the super ellipse is now possible to create with the parameters of
+      x-radius, y-radius, and the r value in the exponent of the super ellipse, i.e. 2 is a normal
+      ellipse.
+      
+      
+V-0.3.2: Concave Polygon Update
+Released: 12/10/2015
+
+  --  Added collision detection for any concave polygons, and should work for complex polygons but
+      hasn't been tested yet. Detection is based off of if an edge of one polygon intersects the other
+      this has O(n^2) run time but shouldn't be a problem with smaller polygons.
+      
+  --  Added new shapes to play around with. Added the Hypocycloid, and its subclass Deltoid and the
+      new Cardioid. 
+      
+  --  Changed how edges were stored in the polygon class so that everything is computed at construction
+      making the class run faster if only a few polygon's are made and then put into an environment.
+      
+      
+V-0.3.3: Heart Update
+Released: 12/11/2015
+
+  --  Added hearts to the list of shapes offered by the program, you can change the radius of the heart
+      but it is not the pixel radius of the heart, rather a general radius so some fudging may be
+      required.
+      
+  --  Added four types of hearts for easy access in drawing, the quarter heart, half heart, three quarter
+      heart and the full heart.
+      
+V-0.3.4: Shape Area Update
+Released 1/3/2016
+
+  --  Added Planar Vector utility for additional constructors of Planar Vectors.
+  
+  --  Added three new tuple types, triple, quadruple and the quintuple, all of which share the same
+      properties of the pair class.
+      
+  --  Added a getArea function for shapes so you can find their area, area is not computationally complex
+      as it is stored in the class as soon as the shape is created. Area is computed using the triangles
+      in the polygon approximation coming out from the polygon.
+      
+V-0.3.4.1: PlanarVector Bug fix
+Released 1/4/2016
+
+  --  Fixed bug where it would sometimes give the wrong direction when you use the direction method of a
+      planar vector.
+      
+V-0.4.0: Refactoring Update
+Released 2/15/2016
+**Libraries**
+GCore V-0.1.0
+
+  --  Refactored the pieces of GMath into two new libraries.
+  
+  --  GCore will now be the core pieces of the libraries that are general to all of the other
+      libraries.
+  
+  --  GPoly will become the shape classes and polygon classes for rendering and physics.
+  
+
+ V-0.4.1: Number Theory and Optimization Update
+ Released 02/26/2016
+ **Libraries**
+ GCore V-0.1.5
+ 
+   --  Changed the BigInteger class to be a wrapper class for java's big integer into the ordered ring super class
+       for easier implementation and faster computation.
+       
+   --  RingMath has been removed and its methods have been moved to the ring class and the silly ones that didn't
+       always work have been removed.
+       
+   --  Added a modulo arithmetic class that can do basic number theory operations on long types and big integer types.
+   
+   --  Added prime classes to include some basic primality tests.
+   
+   --  Added a big prime class that will do more complex probability prime tests, note that these tests only give numbers
+       that are prime with a high probability.
+       
+       
+V-0.4.2: Polynomial and Finite Field Update
+Released 03/09/2016
+**Libraries**
+GCore V-0.1.7
+
+  --  Added a polynomial class for handling basic polynomial functions, need to have a field for the polynomial
+      and it will become a ring of polynomials.
+      
+  --  Added a finite field class which can make a finite field element with the given value and modulus, the 
+      modulus given needs to be prime for the class to work though.
+      
+  --  Added a field polynomial class that expands upon the polynomial class but adds functionality only possible if
+      the type given is a field instead of a ring.
+ 
+   
+V-0.4.3: Matrix and Vector Update
+Released 03/11/2016
+**Libraries**
+GCore V-0.1.8
+
+  --  Added a matrix class that forms a ring when you take any ring for the entries in the matrix. This ring
+      is different than normal rings as it has a different left and right identity than normal but for a 
+      square matrix these two will line up.   
+      
+  --  Added an NVector class that is similar to the planar vector except it is general to any ring and it can
+      be any dimension the user desires. The downside is operations need to be checked that they are all using
+      the same dimension of vector or it will throw an illegal argument exception.
+      
+  --  Added basic matrix operations to the matrix class including transposition and determinants.      
+      
+      
+V-0.4.4: Full Finite Field Update
+Released 03/15/2016
+**Libraries**
+GCore V-0.1.8
+
+  --  Changed the finite field class to be the prime field element class and to construct one you need to
+      create a prime field object and then call its constructor method element from the created class. 
+      This is to reduce the prime computations when creating a prime field element.
+      
+  --  Added a new finite field class that will allow the creation of any finite field with the size being
+      a prime power.
+      
+  --  Added constructors to the finite field class so you can specify the prime power or the characteristic
+      of the polynomial so the class doesn't need to calculate it and so that the characteristic generated
+      for the finite field is no longer random.
+      
+  --  Changed the representation of zero in the polynomial class to be a single zero element now so that 
+      the identity polynomial can be correctly constructed from the polynomial, this means that you can
+      no longer give an empty array to the polynomial to get the zero polynomial it has to have the single
+      zero element.
+
+   
+V-0.5.0: Function Update
+Released 01/06/2017
+**Libraries**
+GCore V-0.3.2
+
+  --  Added all common functions and combinations of functions including basic trigonometric functions,
+      exponential functions, and algebraic functions and the combinations including product sum and quotient.
+      
+  --  Adding these functions makes it easy to compose functions for dynamical systems and a streamlined system
+      for taking their derivative.
+
